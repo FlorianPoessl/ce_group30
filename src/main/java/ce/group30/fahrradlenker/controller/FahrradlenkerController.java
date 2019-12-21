@@ -36,5 +36,10 @@ public class FahrradlenkerController {
         return new ModelAndView("order");
     }
 
+    @RequestMapping("/handlebar")
+    public ModelAndView getHandlebar(){
+        return new ModelAndView("handlebar");
+    }
+
 
 }
