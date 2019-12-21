@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Lenkertyp</title>
@@ -10,16 +11,23 @@
 <script type="text/javascript" src="/js/main.js"></script>
 <script src="https://kit.fontawesome.com/dfbdf2ff96.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-Lenkertyp auswählen
+<div class="a">
+<h1>Lenkertyp auswählen</h1>
 <form>
     <select id="selectHandlebar">
     </select>
 </form>
-
+<style>
+body{
+background-color: #bfffbf;
+}
+</style>
+    <br>
 <button id="goToMaterial" onclick="goToMaterialButton()">Weiter</button>
-
+</div>
 <script>
-    $(document).ready(loadDataHandlebar());
+$(document).ready(loadDataHandlebar());
+
 </script>
 
 </body>
