@@ -1,0 +1,91 @@
+.headline {
+    font-size: 30px;
+    color: white;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.marginBottomDiv {
+    margin-bottom: 10px;
+}
+
+.headlineBack {
+    background-color: #012D77;
+    width:99%;
+}
+
+.movieButton {
+    background-color: #1F7701;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.snackButton {
+    background-color: #1F7701;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.searchMovieButton {
+    background-color: #1F7701;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.searchSnackButton {
+    background-color: #1F7701;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.leftTextMargin {
+    margin-left: 50px;
+}
+
+.movieSymbol {
+   font-size: 25px;
+   width: 50px;
+   height: 50px;
+   color: white;
+}
+
+.inline-block-child {
+  display: inline-block;
+}
+
+.formHeader {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.formTextInput {
+    margin-bottom: 5px;
+    margin-left: 30px;
+    font-size: 18px;
+}
+
+.movieResultTable {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
