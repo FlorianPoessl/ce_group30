@@ -11,14 +11,7 @@ function goToHandlebarButton () {
              type: "POST",
              url: "http://localhost:8080/newCustomer",
              data: data,
-             async: false,
-             success: function (result) {
-                 console.log(result);
-                 handlebars = JSON.parse(result);
-             },
-             error: function (result) {
-                 console.log("Something went wrong");
-             }
+             async: false
          });
       console.log("Executing Button");
       window.open("handlebar", "_self");
@@ -57,14 +50,7 @@ function goToMaterialButton () {
            type: "POST",
            url: "http://localhost:8080/addHandlebar",
            data: data,
-           async: false,
-           success: function (result) {
-               console.log(result);
-               handlebars = JSON.parse(result);
-           },
-           error: function (result) {
-               console.log("Something went wrong");
-           }
+           async: false
        });
 
       console.log("Executing Button");
@@ -97,6 +83,16 @@ function loadDataMaterial () {
 };
 
 function goToGearingButton () {
+      var select = document.getElementById("selectMaterial");
+        var text = select.options[select.selectedIndex].text;
+        var data = {material: text};
+        $.ajax({
+             type: "POST",
+             url: "http://localhost:8080/addMaterial",
+             data: data,
+             async: false
+         });
+
       console.log("Executing Button");
       window.open("gearing", "_self");
 };
@@ -127,6 +123,16 @@ function loadDataGearing () {
 };
 
 function goToHandleButton () {
+      var select = document.getElementById("selectGearing");
+      var text = select.options[select.selectedIndex].text;
+      var data = {gearing: text};
+      $.ajax({
+           type: "POST",
+           url: "http://localhost:8080/addGearing",
+           data: data,
+           async: false
+       });
+
       console.log("Executing Button");
       window.open("handle", "_self");
 };
@@ -157,19 +163,42 @@ function loadDataHandle () {
 };
 
 function goToOrderButton () {
+       var select = document.getElementById("selectHandle");
+            var text = select.options[select.selectedIndex].text;
+            var data = {handle: text};
+            $.ajax({
+                 type: "POST",
+                 url: "http://localhost:8080/addHandle",
+                 data: data,
+                 async: false
+             });
+
       console.log("Executing Button");
       window.open("order", "_self");
 };
 
 function loadDataOrder() {
     var handlebars;
+    var vorname = document.getElementById("vorname");
+    var nachname = document.getElementById("nachname");
+    var lenkertyp = document.getElementById("lenkertyp");
+    var material = document.getElementById("material");
+    var schaltung = document.getElementById("schaltung");
+    var griff = document.getElementById("griff");
+
     $.ajax({
       type: "GET",
-      url: "http://localhost:8080/getOrder",
+      url: "http://localhost:8080/getOrderInfo",
       async: false,
       success: function (result) {
           console.log(result);
-          handlebars = JSON.parse(result);
+          var info = JSON.parse(result);
+          vorname.innerHTML = info.vorname;
+          nachname.innerHTML = info.nachname;
+          lenkertyp.innerHTML = info.bestellung.lenkertyp;
+          material.innerHTML = info.bestellung.material;
+          schaltung.innerHTML = info.bestellung.schaltung;
+          griff.innerHTML = info.bestellung.griff;
       },
       error: function (result) {
           console.log("Something went wrong");

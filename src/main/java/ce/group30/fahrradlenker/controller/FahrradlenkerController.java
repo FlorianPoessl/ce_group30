@@ -51,8 +51,14 @@ public class FahrradlenkerController {
     }
 
     @GetMapping("/getGearing")
-    public String getAvailableGearings(@RequestParam("data") String data) throws IOException {
-        return (this.createRequest("https://www.maripavi.at/produkt/schaltung", data, "lenkertyp"));
+    public String getAvailableGearings() throws IOException {
+        String handlebar = customerService.getCustomer().getBestellungen().getLenkertyp();
+        return (this.createRequest("https://www.maripavi.at/produkt/schaltung", handlebar, "lenkertyp"));
+    }
+
+    @PostMapping("/addGearing")
+    public void addGearing(@RequestParam("gearing") String gearing) {
+        customerService.setSchaltung(gearing);
     }
 
     @RequestMapping("/handle")
@@ -61,8 +67,14 @@ public class FahrradlenkerController {
     }
 
     @GetMapping("/getHandle")
-    public String getAvailableHandles(@RequestParam("data") String data) throws IOException {
-        return (this.createRequest("https://www.maripavi.at/produkt/griff", data, "material"));
+    public String getAvailableHandles() throws IOException {
+        String material = customerService.getCustomer().getBestellungen().getMaterial();
+        return (this.createRequest("https://www.maripavi.at/produkt/griff", material, "material"));
+    }
+
+    @PostMapping("/addHandle")
+    public void addHandle(@RequestParam("handle") String handle) {
+        customerService.setGriff(handle);
     }
 
     @RequestMapping("/material")
@@ -73,8 +85,12 @@ public class FahrradlenkerController {
     @GetMapping("/getMaterial")
     public String getAvailableMaterial() throws IOException {
         String handlebar = customerService.getCustomer().getBestellungen().getLenkertyp();
-        System.out.println(handlebar);
-        return (this.createRequest("https://www.maripavi.at/produkt/material/", handlebar, "lenkertyp"));
+        return (this.createRequest("https://www.maripavi.at/produkt/material", handlebar, "lenkertyp"));
+    }
+
+    @PostMapping("/addMaterial")
+    public void addMaterial(@RequestParam("material") String material) {
+        customerService.setMaterial(material);
     }
 
     @RequestMapping("/order")
@@ -82,9 +98,9 @@ public class FahrradlenkerController {
         return new ModelAndView("order");
     }
 
-    @GetMapping("/getOrder")
+    @GetMapping("/getOrderInfo")
     public String getAvailableOrder() throws IOException {
-        return (this.createRequest("https://www.maripavi.at/produkt/lenkertyp", null, null));
+        return customerService.getOrderInfoJson();
     }
 
     @RequestMapping("/handlebar")
@@ -94,7 +110,6 @@ public class FahrradlenkerController {
 
     @GetMapping("/getHandlebar")
     public String getAvailableHandlebars() throws IOException {
-        System.out.println("Nachname: " + customerService.getCustomer().getNachname());
         return (this.createRequest("https://www.maripavi.at/produkt/lenkertyp", null, null));
     }
 
@@ -128,71 +143,6 @@ public class FahrradlenkerController {
                 String.class);
 
         return response.getBody();
-
-        /*URL url = new URL(specifiedUrl);
-
-        byte[] postDataBytes = null;
-        if (parameter != null) {
-            Map<String, Object> params = new LinkedHashMap<>();
-            params.put(parameterDetail, parameter);
-
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) postData.append('&');
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append('=');
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-            postDataBytes = postData.toString().getBytes("UTF-8");
-        }
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setDoOutput(true);
-        if(parameter != null) {
-            conn.getOutputStream().write(postDataBytes);
-            System.out.println(conn.getRequestMethod());
-        }
-        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-        StringBuilder data = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;) {
-            data.append((char)c);
-        }
-        String intentData = data.toString();
-        System.out.println(intentData);
-
-        return intentData;
-
-
-        /*URL url = new URL(specifiedUrl);
-        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-
-        if(parameter != null) {
-            System.out.println(parameterDetail + ":" + parameter);
-            Map<String, String> parameters = new HashMap<>();
-            parameters.put(parameterDetail, parameter);
-
-
-
-            con.setDoOutput(true);
-            DataOutputStream out = new DataOutputStream(con.getOutputStream());
-            out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-            out.flush();
-            out.close();
-        }
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content.toString());
-        con.disconnect();
-        return content.toString();*/
     }
 
 }
