@@ -122,7 +122,7 @@ public class FahrradlenkerController {
     @GetMapping("/checkOrder")
     public String checkOrder() throws IOException {
         Map<String, String> data = customerService.getOrderInfoJson();
-        data.replace("lenkertyp", "test");
+
         return this.createPostRequest("https://www.maripavi.at/bestellung", data);
     }
 
