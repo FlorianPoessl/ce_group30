@@ -19,45 +19,41 @@ text-align:center;
     width:99%;
 }
 
-.movieButton {
-    background-color: #1F7701;
-    margin-left: 30px;
+.h1 {
     margin-bottom: 10px;
-    font-size: 25px;
-    width: 50px;
-    height: 50px;
-    color: white;
 }
 
-.snackButton {
-    background-color: #1F7701;
-    margin-left: 30px;
+.h2 {
     margin-bottom: 10px;
-    font-size: 25px;
-    width: 50px;
-    height: 50px;
-    color: white;
 }
 
-.searchMovieButton {
+.navigation {
+    font-weight: bold
+}
+
+.customButton {
     background-color: #1F7701;
-    margin-left: 30px;
-    margin-bottom: 10px;
     margin-top: 5px;
-    font-size: 25px;
+    font-size: 18px;
     width: 50px;
-    height: 50px;
+    height: 35px;
     color: white;
 }
 
-.searchSnackButton {
-    background-color: #1F7701;
-    margin-left: 30px;
-    margin-bottom: 10px;
+.customButtonDeactivated {
+    background-color: #9B9F9A;
     margin-top: 5px;
-    font-size: 25px;
+    font-size: 18px;
     width: 50px;
-    height: 50px;
+    height: 35px;
+    color: white;
+}
+
+.customTextButton {
+    background-color: #1F7701;
+    margin-top: 5px;
+    font-size: 18px;
+    height: 35px;
     color: white;
 }
 

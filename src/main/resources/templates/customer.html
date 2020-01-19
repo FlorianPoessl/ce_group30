@@ -27,7 +27,15 @@ background-color: #bfffbf;
     <div class="formHeader">Nachname:</div>
     <input class="formTextInput" id="customerSurname" type="text">
 </form>
-<button id="goToHandlebar" onclick="goToHandlebarButton()">Weiter</button>
+    <div>
+        <button title="Weiter" id="createCustomer" class="customTextButton" onclick="createCustomerButton()">Kunde anlegen</button>
+    </div>
+    <div>
+        <button title="Weiter" id="goToHandlebar" class="customButton" disabled onclick="goToHandlebarButton()"><i class="fas fa-arrow-right"></i></button>
+    </div>
 </div>
+<script>
+    $(document).ready(loadCustomerPage());
+</script>
 </body>
 </html>

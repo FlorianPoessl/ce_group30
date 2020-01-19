@@ -1,20 +1,34 @@
-function goToCustomerButton () {
+function goToCustomerButton() {
       console.log("Executing Button");
-      window.open("customer", "_self");
+      window.location.href = "customer";
 };
 
+function loadCustomerPage() {
+    var nextButton = document.getElementById("goToHandlebar");
+    nextButton.setAttribute("class", "customButtonDeactivated");
+};
+
+function createCustomerButton () {
+   var vorname = document.getElementById("customerName").value;
+   var nachname = document.getElementById("customerSurname").value;
+   var data = {vorname: vorname, nachname: nachname};
+   $.ajax({
+         type: "POST",
+         url: "http://localhost:8080/newCustomer",
+         data: data,
+         async: false,
+         success: function () {
+            alert("Der Kunde " + vorname + " " + nachname + " wurde erfolgreich angelegt");
+         }
+     });
+     document.getElementById('goToHandlebar').disabled = false;
+      var nextButton = document.getElementById("goToHandlebar");
+      nextButton.setAttribute("class", "customButton");
+}
+
 function goToHandlebarButton () {
-       var vorname = document.getElementById("customerName").value;
-       var nachname = document.getElementById("customerSurname").value;
-       var data = {vorname: vorname, nachname: nachname};
-       $.ajax({
-             type: "POST",
-             url: "http://localhost:8080/newCustomer",
-             data: data,
-             async: false
-         });
       console.log("Executing Button");
-      window.open("handlebar", "_self");
+      window.location.href = "handlebar";
 };
 
 function loadDataHandlebar () {
@@ -54,7 +68,7 @@ function goToMaterialButton () {
        });
 
       console.log("Executing Button");
-      window.open("material", "_self");
+     window.location.href = "material"
 };
 
 function loadDataMaterial () {
@@ -94,7 +108,7 @@ function goToGearingButton () {
          });
 
       console.log("Executing Button");
-      window.open("gearing", "_self");
+      window.location.href = "gearing";
 };
 
 function loadDataGearing () {
@@ -134,7 +148,7 @@ function goToHandleButton () {
        });
 
       console.log("Executing Button");
-      window.open("handle", "_self");
+      window.location.href = "handle";
 };
 
 function loadDataHandle () {
@@ -174,7 +188,7 @@ function goToOrderButton () {
              });
 
       console.log("Executing Button");
-      window.open("order", "_self");
+      window.location.href = "order";
 };
 
 function loadDataOrder() {
@@ -204,5 +218,16 @@ function loadDataOrder() {
           console.log("Something went wrong");
       }
     });
+};
+
+function checkOrderButton () {
+    $.ajax({
+         type: "GET",
+         url: "http://localhost:8080/checkOrder",
+         success: function (result) {
+             alert(result);
+         },
+         async: false
+     });
 };
 

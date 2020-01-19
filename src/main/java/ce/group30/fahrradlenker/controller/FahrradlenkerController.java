@@ -2,9 +2,7 @@ package ce.group30.fahrradlenker.controller;
 
 import ce.group30.fahrradlenker.objects.Customer;
 import ce.group30.fahrradlenker.objects.Order;
-import ce.group30.fahrradlenker.objects.Test;
 import ce.group30.fahrradlenker.services.CustomerService;
-import ce.group30.fahrradlenker.services.ParameterStringBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
@@ -100,7 +98,7 @@ public class FahrradlenkerController {
 
     @GetMapping("/getOrderInfo")
     public String getAvailableOrder() throws IOException {
-        return customerService.getOrderInfoJson();
+        return customerService.getOrderAndCustomerInfoJson();
     }
 
     @RequestMapping("/handlebar")
@@ -121,6 +119,13 @@ public class FahrradlenkerController {
         customerService.setLenkertyp(handlebar);
     }
 
+    @GetMapping("/checkOrder")
+    public String checkOrder() throws IOException {
+        Map<String, String> data = customerService.getOrderInfoJson();
+        data.replace("lenkertyp", "test");
+        return this.createPostRequest("https://www.maripavi.at/bestellung", data);
+    }
+
     public String createRequest(String specifiedUrl, String parameter, String parameterDetail) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -139,6 +144,30 @@ public class FahrradlenkerController {
         HttpEntity<String> response = restTemplate.exchange(
                 builder.toUriString(),
                 HttpMethod.GET,
+                entity,
+                String.class);
+
+        return response.getBody();
+    }
+
+    public String createPostRequest(String specifiedUrl, Map<String, String> parameter) throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+
+        System.out.println(specifiedUrl);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(specifiedUrl);;
+        for(Map.Entry<String, String> parameterEntry : parameter.entrySet()) {
+            builder = builder.queryParam(parameterEntry.getKey(), parameterEntry.getValue());
+        }
+
+        System.out.println(builder.toUriString());
+
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        HttpEntity<String> response = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.POST,
                 entity,
                 String.class);
 
